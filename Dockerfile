@@ -18,9 +18,11 @@ COPY cmdrunner-2.3.jar /JMETER_LIB
 
 
 # Downloading JMeter
-RUN apk --no-cache add curl ca-certificates openjdk9-jre && \
-    curl -L https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz --output /tmp/apache-jmeter-${JMETER_VERSION}.tgz && \
-    tar -zxvf /tmp/apache-jmeter-${JMETER_VERSION}.tgz && \
+#RUN apk --no-cache add curl ca-certificates openjdk9-jre && \
+#    curl -L https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-${JMETER_VERSION}.tgz --output /tmp/apache-jmeter-${JMETER_VERSION}.tgz && \
+#    tar -zxvf /tmp/apache-jmeter-${JMETER_VERSION}.tgz && \
+CMD pip install bzt
+
     mkdir -p /opt && \
     mv apache-jmeter-${JMETER_VERSION} /opt && \
     rm /tmp/apache-jmeter-${JMETER_VERSION}.tgz && \
@@ -33,4 +35,4 @@ RUN /jmeter-plugin-install.sh
 
 ENTRYPOINT [ "/entrypoint.sh" ]
 
-RUN pip install bzt
+#RUN pip install bzt
